@@ -1,13 +1,15 @@
 package com.explore.stl.explorestlmo.domain;
 
 
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Objects;
 
 @Entity
+@Data
 public class TourRating {
 
     @EmbeddedId
@@ -19,67 +21,22 @@ public class TourRating {
     @Column
     private String comment;
 
-    public TourRating(){
+    public TourRating() {
     }
 
     /**
      * Create a fully initialized TourRating.
-     * @param pk         primiary key of a tour and customer id.
-     * @param score      Integer score (1-5)
-     * @param comment    Optional comment from the customer
+     *
+     * @param pk      primiary key of a tour and customer id.
+     * @param score   Integer score (1-5)
+     * @param comment Optional comment from the customer
      */
+    @Autowired
     public TourRating(TourRatingPk pk, Integer score, String comment) {
         this.pk = pk;
         this.score = score;
         this.comment = comment;
     }
 
-    @Override
-    public String toString() {
-        return "TourRating{" +
-                "pk=" + pk +
-                ", score=" + score +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TourRating that = (TourRating) o;
-        return Objects.equals(pk, that.pk) &&
-                Objects.equals(score, that.score) &&
-                Objects.equals(comment, that.comment);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pk, score, comment);
-    }
-
-    public TourRatingPk getPk() {
-        return pk;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setPk(TourRatingPk pk) {
-        this.pk = pk;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }
 
